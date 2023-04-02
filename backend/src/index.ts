@@ -17,8 +17,11 @@ const mongodb_db_name = process.env.MONGODB_DB_NAME;
 
 
 // Create logger
-log4js.configure('./config/log4js.config.json');
+log4js.configure('./conf/log4js.config.json');
 const logger = log4js.getLogger();
+
+// Middlewares
+app.use(log4js.connectLogger(log4js.getLogger("http"), { level: 'auto' }));
 
 app.use('/api/v1.0', routes);
 
