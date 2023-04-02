@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 class NotesController {
     notesList(req:Request, res:Response) {
-        res.send('note list')
+        res.status(200).send('note list')
     }
 }
 

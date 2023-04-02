@@ -1,3 +1,5 @@
+import path from 'path';
+
 import express, { Express, ErrorRequestHandler } from 'express';
 import log4js from 'log4js';
 
@@ -9,7 +11,7 @@ import notiConfig from './conf/noti.config';
 const app: Express = express();
 
 // Create logger
-log4js.configure('./conf/log4js.config.json');
+log4js.configure(path.join(__dirname, './conf/log4js.config.json'));
 const logger = log4js.getLogger();
 
 // Middlewares
