@@ -1,5 +1,6 @@
 import express, { Express } from 'express';
 import mongoose, { ConnectOptions } from 'mongoose';
+import log4js from 'log4js';
 
 import routes from './routes/index';
 
@@ -14,6 +15,10 @@ const mongodb_user = process.env.MONGODB_USER;
 const mongodb_password = process.env.MONGODB_PASSWORD;
 const mongodb_db_name = process.env.MONGODB_DB_NAME;
 
+
+// Create logger
+log4js.configure('./config/log4js.config.json');
+const logger = log4js.getLogger();
 
 app.use('/api/v1.0', routes);
 
