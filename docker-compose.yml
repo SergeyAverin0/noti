@@ -48,3 +48,15 @@ services:
       - 3000:3000
     env_file:
       - .env
+
+  noti_docs:
+    build:
+      context: docs
+      dockerfile: Dockerfile
+    container_name: noti_docs
+    volumes:
+      - ./docs:/app
+    ports:
+      - 8888:8000
+    env_file:
+      - .env

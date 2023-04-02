@@ -1,0 +1,6 @@
+site_name: MkLorum
+site_url: !!python/object/apply:os.getenv ["DOCS_URL"]  
+dev_addr: '0.0.0.0:8000'
+nav:
+    - Home: index.md
+theme: readthedocs
