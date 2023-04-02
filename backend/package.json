@@ -22,13 +22,16 @@
   "homepage": "https://github.com/SergeyAverin/noti#readme",
   "dependencies": {
     "concurrently": "^8.0.1",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "log4js": "^6.9.1",
-    "mongoose": "^7.0.3"
+    "mongoose": "^7.0.3",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.10",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "eslint": "^8.37.0",
@@ -38,6 +41,7 @@
     "nodemon": "^2.0.22",
     "prettier": "2.8.7",
     "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0",
     "typescript": "^5.0.2"
   }
 }
