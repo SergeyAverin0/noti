@@ -7,8 +7,8 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
-    "eslint:lint": "eslint ./src/**/*.ts",
-    "eslint:fix": "eslint --fix"
+    "lint": "eslint --ignore-path  ./src/**/*.ts",
+    "format": "prettier --ignore-path .gitignore --write --parser typescript \"**/*.ts\""
   },
   "repository": {
     "type": "git",

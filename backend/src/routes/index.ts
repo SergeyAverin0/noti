@@ -1,10 +1,8 @@
-import express, { Router } from 'express';
+import express, { Router } from 'express'
 
-import noteRoute from './notes.routes';
+import noteRoute from './notes.routes'
 
+const routes: Router = express.Router()
+routes.use('/notes', noteRoute)
 
-const routes:Router = express.Router();
-routes.use('/notes', noteRoute);
-
-
-export default routes;
+export default routes

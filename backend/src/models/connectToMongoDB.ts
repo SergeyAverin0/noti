@@ -1,19 +1,18 @@
-import mongoose, { ConnectOptions } from 'mongoose';
-import log4js from 'log4js';
+import mongoose, { ConnectOptions } from 'mongoose'
+import log4js from 'log4js'
 
-import dbConfig from "../conf/db.config";
+import dbConfig from '../conf/db.config'
 
-
-const logger = log4js.getLogger();
+const logger = log4js.getLogger()
 
 const connectToMongoDB = async () => {
-    mongoose
-      .connect(
-        `mongodb://${dbConfig.MONGODB_USER}:${dbConfig.MONGODB_PASSWORD}@${dbConfig.MONGODB_HOST}:${dbConfig.MONGODB_PORT}/${dbConfig.MONGODB_DB_NAME}?authSource=admin`,
-        { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions
-      )
-      .catch((error) => logger.error(error))
-      .then(() => logger.info("Mongodb connect"));
-};
-  
-export default connectToMongoDB;
+  mongoose
+    .connect(
+      `mongodb://${dbConfig.MONGODB_USER}:${dbConfig.MONGODB_PASSWORD}@${dbConfig.MONGODB_HOST}:${dbConfig.MONGODB_PORT}/${dbConfig.MONGODB_DB_NAME}?authSource=admin`,
+      { useNewUrlParser: true, useUnifiedTopology: true } as ConnectOptions,
+    )
+    .catch((error) => logger.error(error))
+    .then(() => logger.info('Mongodb connect'))
+}
+
+export default connectToMongoDB
