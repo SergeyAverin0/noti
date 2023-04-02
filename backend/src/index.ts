@@ -13,6 +13,8 @@ log4js.configure(log4jsConfig)
 const logger = log4js.getLogger()
 
 // Middlewares
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(
   log4js.connectLogger(log4js.getLogger('http'), {
     level: 'auto',
