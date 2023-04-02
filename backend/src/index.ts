@@ -1,19 +1,13 @@
 import express, { Express, ErrorRequestHandler } from 'express';
-import mongoose, { ConnectOptions } from 'mongoose';
 import log4js from 'log4js';
 
 import routes from './routes/index';
+import connectToMongoDB from './models/connectToMongoDB';
 
 
 const app: Express = express();
 const port = process.env.BACKEND_PORT;
 const host = process.env.BACKEND_HOST;
-
-const mongodb_host = process.env.MONGODB_HOST;
-const mongodb_port = process.env.MONGODB_PORT;
-const mongodb_user = process.env.MONGODB_USER;
-const mongodb_password = process.env.MONGODB_PASSWORD;
-const mongodb_db_name = process.env.MONGODB_DB_NAME;
 
 
 // Create logger
@@ -34,14 +28,10 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
 app.use(errorHandler);
 
-
 // Start server
 const start = async () => {
   try {
-    await mongoose.connect(
-      `mongodb://${mongodb_user}:${mongodb_password}@${mongodb_host}:${mongodb_port}/${mongodb_db_name}?authSource=admin`,
-      {  useNewUrlParser: true,  useUnifiedTopology: true } as ConnectOptions
-    );
+    connectToMongoDB();
     app.listen(port, () => {
       console.log(`[server]: Server is running at http://${host}:${port}`);
     });    
