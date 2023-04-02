@@ -3,12 +3,10 @@ import log4js from 'log4js';
 
 import routes from './routes/index';
 import connectToMongoDB from './models/connectToMongoDB';
+import notiConfig from './conf/noti.config';
 
 
 const app: Express = express();
-const port = process.env.BACKEND_PORT;
-const host = process.env.BACKEND_HOST;
-
 
 // Create logger
 log4js.configure('./conf/log4js.config.json');
@@ -32,8 +30,8 @@ app.use(errorHandler);
 const start = async () => {
   try {
     connectToMongoDB();
-    app.listen(port, () => {
-      console.log(`[server]: Server is running at http://${host}:${port}`);
+    app.listen(notiConfig.BACKEND_PORT, () => {
+      console.log(`[server]: Server is running at http://${notiConfig.BACKEND_HOST}:${notiConfig.BACKEND_PORT}`);
     });    
   } catch (error) {
     console.error(error);
