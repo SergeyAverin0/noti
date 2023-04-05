@@ -4,13 +4,26 @@ import { Note, INote } from "../models/Note.model";
 class NotesService {
     private model = Note;
 
+    isObjectFound(obj: INote | null): void {
+        // Throw error if object not  found
+        
+        if (!obj) {
+            throw new Error('Not found');
+        }
+    }
+
     async getNoteList(): Promise<INote[]> {
+        // get user's notes list
         return await this.model.find({});
     }
 
     async getNote(slug: string): Promise<INote | null> {
         // This method return note by note's slug
-        return await  this.model.findOne({slug: slug})
+        const note = await this.model.findOne({slug: slug})
+
+        this.isObjectFound(note)
+        
+        return note
     }
 }
 
