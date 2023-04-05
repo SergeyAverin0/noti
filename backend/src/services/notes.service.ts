@@ -31,6 +31,12 @@ class NotesService {
         const createdNote = new this.model({title: title});
         return await createdNote.save();
     }
+
+    async deleteNote(slug: string): Promise<void>{
+        // This method delete note by slug
+        const note = await this.getNote(slug)
+        await note?.deleteOne()
+    }
 }
 
 export default new NotesService();
