@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import mongoose from 'mongoose'
+import mongoose, { Document } from 'mongoose'
 
 const { Schema } = mongoose
 
@@ -13,13 +13,13 @@ enum CellsType {
   LIST = 'list',
 }
 
-interface ICells {
+export interface ICells extends Document {
   cellsType: CellsType
   props: object
   text: string
 }
 
-interface INote {
+export interface INote extends Document {
   title: string
   slug: string
   isTrash: boolean
@@ -39,7 +39,7 @@ const CellsScheme = new mongoose.Schema<ICells>({
   text: String,
 })
 
-const NoteScheme = new Schema<INote>({
+export const NoteScheme = new Schema<INote>({
   title: {
     type: String,
     required: true,
