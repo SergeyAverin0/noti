@@ -25,6 +25,12 @@ class NotesService {
         
         return note
     }
+
+    async createNote(title: string): Promise<INote>{
+        // This method create new note
+        const createdNote = new this.model({title: title});
+        return await createdNote.save();
+    }
 }
 
 export default new NotesService();
