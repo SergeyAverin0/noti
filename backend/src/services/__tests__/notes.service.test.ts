@@ -33,8 +33,45 @@ import {
     })
 
     it('should get notes list', async () => {
-      const notesList = await NotesService.getList();
+      const notesList = await NotesService.getNoteList();
       expect(notesList.length).toBe(1)
+    })
+
+    it('should get note by slug', async () => {
+      const notesList = await NotesService.getNote('testNote');
+      expect(notesList?.slug).toBe('testNote')
+    })
+
+    it('should throw not found error', async () => {
+      let error;
+      try {
+        await NotesService.getNote('testNoteError');
+      } catch (e) {
+        error = e
+      }
+      expect(error).toBeInstanceOf(Error)
+    })
+
+    it('should create and save a new note', async () => {
+      const savedNote = await NotesService.createNote('new note')
+      expect(savedNote._id).toBeDefined()
+      expect(savedNote.title).toBe('new note')
+    })
+
+    it('should delete note by slug', async () => {
+      await NotesService.deleteNote('testNote')
+      let error;
+      try {
+        await NotesService.getNote('testNote');
+      } catch (e) {
+        error = e
+      }
+      expect(error).toBeInstanceOf(Error)
+    })
+
+    it('should update note ', async () => {
+      const note = await NotesService.updateNote('testNote', {'title': 'newTitle'})
+      expect(note?.title).toBe('newTitle')
     })
   })
   
