@@ -1,10 +1,17 @@
 import express, { Router } from 'express'
 
-import notesControllerfrom from '../controllers/notes.controller'
+import NotesController from '../controllers/notes.controller'
+import SingleNotesController from '../controllers/singleNote.controller'
 
 const noteRoute: Router = express.Router()
 
-// WorkCase
-noteRoute.route('').get((req, res) => notesControllerfrom.notesList(req, res))
+// List Note
+noteRoute.route('')
+    .get((req, res) => NotesController.get(req, res))
+    .post((req, res) => NotesController.post(req, res))
+
+// Single Note
+noteRoute.get('/:slug', (req, res) => SingleNotesController.get(req, res))
+
 
 export default noteRoute
