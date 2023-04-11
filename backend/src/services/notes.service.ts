@@ -37,6 +37,11 @@ class NotesService {
         const note = await this.getNote(slug)
         await note?.deleteOne()
     }
+
+    async updateNote(slug: string, update: Partial<INote>): Promise<INote | null> {
+        const note = await Note.findOneAndUpdate({ slug: slug }, update, { new: true });
+        return note;
+    }
 }
 
 export default new NotesService();
