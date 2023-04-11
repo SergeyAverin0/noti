@@ -12,6 +12,7 @@ noteRoute.route('')
 
 // Single Note
 noteRoute.get('/:slug', (req, res) => SingleNotesController.get(req, res))
+noteRoute.patch('/:slug', (req, res) => SingleNotesController.patch(req, res))
 
 
 export default noteRoute
