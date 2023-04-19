@@ -12,6 +12,7 @@ import {
   import connection from '../../models/connect'
   import NotesService from '../notes.service'
   import { Note } from '../../models/Note.model'
+import { NotFoundError } from "../../errors/NotFoundError";
   
 
   describe('Note service', () => {
@@ -66,7 +67,7 @@ import {
       } catch (e) {
         error = e
       }
-      expect(error).toBeInstanceOf(Error)
+      expect(error).toBeInstanceOf(NotFoundError)
     })
 
     it('should update note ', async () => {

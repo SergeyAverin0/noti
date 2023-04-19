@@ -1,4 +1,5 @@
 import { Note, INote } from "../models/Note.model";
+import { NotFoundError } from "../errors/NotFoundError";
 
 
 class NotesService {
@@ -8,7 +9,7 @@ class NotesService {
         // Throw error if object not  found
         
         if (!obj) {
-            throw new Error('Not found');
+            throw new NotFoundError('Not found');
         }
     }
 
