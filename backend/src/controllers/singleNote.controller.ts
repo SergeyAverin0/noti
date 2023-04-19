@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 
 import NotesService from '../services/notes.service'
-import { INote } from '../models/Note.model';
 
 
 interface ISingleNotesRequestParams {
@@ -19,6 +18,11 @@ class SingleNotesController {
     const updatedNoteBody = req.body
     const updatedNote = await NotesService.updateNote(slug, updatedNoteBody);
     res.status(200).json(updatedNote);
+  }
+  async delete(req: Request, res: Response) {
+    const { slug } = req.params as unknown as ISingleNotesRequestParams;
+    await NotesService.deleteNote(slug);
+    res.status(204).end();
   }
 }
 
