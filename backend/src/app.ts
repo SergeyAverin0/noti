@@ -5,6 +5,8 @@ import log4js from 'log4js'
 
 import routes from './routes/index'
 import log4jsConfig from './conf/log4js.config'
+import { NotFoundError } from './errors/NotFoundError';
+
 
 const app: Express = express()
 
@@ -29,6 +31,9 @@ app.use('/api/v1.0', routes)
 /* eslint-disable @typescript-eslint/no-unused-vars */
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   logger.error(err.stack);
+  if (err instanceof NotFoundError) {
+    res.sendStatus(404);
+  }
   res.status(500).send('Server error');
 });
 
