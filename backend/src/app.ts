@@ -1,8 +1,12 @@
-import express, { Express, ErrorRequestHandler } from 'express'
+import 'express-async-errors';
+import express, { Express, Response, Request, NextFunction } from 'express' 
+import bodyParser from 'body-parser';
 import log4js from 'log4js'
 
 import routes from './routes/index'
 import log4jsConfig from './conf/log4js.config'
+import { NotFoundError } from './errors/NotFoundError';
+
 
 const app: Express = express()
 
@@ -11,8 +15,9 @@ log4js.configure(log4jsConfig)
 const logger = log4js.getLogger()
 
 // Middlewares
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.use(
   log4js.connectLogger(log4js.getLogger('http'), {
     level: 'auto',
@@ -24,11 +29,12 @@ app.use('/api/v1.0', routes)
 
 // Error handler
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
-  logger.error(err.stack)
-  res.status(500).send('Something broke!')
-}
-
-app.use(errorHandler)
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  logger.error(err.stack);
+  if (err instanceof NotFoundError) {
+    res.sendStatus(404);
+  }
+  res.status(500).send('Server error');
+});
 
 export default app
