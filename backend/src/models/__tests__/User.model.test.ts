@@ -25,26 +25,29 @@ import {
       await User.deleteMany({})
     })
   
-    it('should create and save a new User', async () => {
+    it('should create and save a new user', async () => {
       const userData = {
         username: 'UserName',
-        password: 'UserPassword'
+        password: 'UserPassword',
+        email: 'test@gmail.com'
       }
       const user = new User(userData)
       const savedUser = await user.save()
       expect(savedUser._id).toBeDefined()
       expect(savedUser.username).toBe(userData.username)
-      expect(savedUser.slug.length).toBeGreaterThan(0)
+      expect(savedUser.password).toBe(userData.password)
     })
   
-    it('should not save a note with invalid title', async () => {
-      const noteData = {
-        title: '_'.repeat(51),
+    it('should not save a user with invalid email', async () => {
+      const userData = {
+        username: 'UserName',
+        password: 'UserPassword',
+        email: 'test@gmailcom'
       }
-      const note = new Note(noteData)
+      const user = new User(userData)
       let error
       try {
-        await note.save()
+        await user.save()
       } catch (e) {
         error = e
       }
