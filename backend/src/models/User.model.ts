@@ -28,7 +28,8 @@ const UserScheme = new Schema<IUser>({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
     },
     dataCreated: {
         type: Date,
