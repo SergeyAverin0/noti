@@ -1,9 +1,9 @@
-import mongoose from 'mongoose'
+import mongoose, { Document } from 'mongoose'
 
 const { Schema } = mongoose
 
 
-export interface IUser {
+export interface IUser extends Document  {
     username: string
     password: string
     avatar: string,
